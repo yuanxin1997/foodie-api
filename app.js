@@ -29,7 +29,7 @@ router.get('/', function(req, res) {
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
-app.use('/api', router);
+app.use('', router);
 
 // REGISTER OUR ROUTES -------------------------------
 app.use('/person', person);
