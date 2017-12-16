@@ -18,9 +18,9 @@ router.get('/checkEmail/:email', function(req, res)  {
   var request = new Request(
     "select * from person where email = @email",
     function(err, rowCount) {
-			if (err) {
-        console.log(err);
-			}
+			// if (err) {
+      //   console.log(err);
+			// }
 
       if(rowCount == 0){
         res.json({message: 'not exists' });
