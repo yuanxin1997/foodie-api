@@ -6,6 +6,7 @@ var express    = require('express');
 var bodyParser = require('body-parser');
 var app        = express();
 var morgan     = require('morgan');
+var router     = express.Router();
 
 const person = require('./js/routes/person');
 
@@ -17,6 +18,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 var port = process.env.PORT || 8080; // set our port
+
+
+// DEFAULT
+router.get('/', function(req, res) {
+    res.json({ message: 'Welcome to our foodin APIs, have a nice day!' });
+});
+
+// more routes for our API will happen here
+
+// REGISTER OUR ROUTES -------------------------------
+// all of our routes will be prefixed with /api
+app.use('/api', router);
 
 // REGISTER OUR ROUTES -------------------------------
 app.use('/person', person);
