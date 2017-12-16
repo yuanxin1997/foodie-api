@@ -23,8 +23,6 @@ connection.on('connect', function(err) {
   }
 });
 
-// connection.on('debug', function(err) {
-//    console.log('debug:', err);
-//  });
+
 
 module.exports = connection;
