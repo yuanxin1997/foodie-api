@@ -34,6 +34,33 @@ router.get('/checkEmail/:email', function(req, res)  {
   connection.execSql(request);
 });
 
+router.get('/login/:email/:password', function(req, res)  {
+  var email = req.params.email;
+	var password = req.params.password;
+  // SQL QUERY
+  var request = new Request(
+    "select * from person where email = @email and password = @password FOR JSON AUTO",
+    function(err, rowCount) {
+      minFunc.log(err, rowCount)
+      if(rowCount == 0){
+        res.json({message: 'invalid' });
+      }
+    }
+  );
+
+  // PARAMETERS --> MUST MATCH TO @[VALUE]
+  request.addParameter('email', TYPES.NVarChar, email);
+	request.addParameter('password', TYPES.NVarChar, password);
+
+	// LISTEN TO ROW RESULTS
+	request.on('row', function(columns) {
+	   res.json(JSON.parse(columns[0].value));
+	});
+
+  // EXECUTE
+  connection.execSql(request);
+});
+
 router.post('/register', function(req, res)  {
   var person = req.body
 
@@ -64,35 +91,14 @@ router.post('/register', function(req, res)  {
 });
 
 
-router.put('/', function(req, res)  {
-  var name = req.body.name
-	res.json({ message: 'put ' + name + ' ' });
-});
-
-router.delete('/:id', function(req, res)  {
-  var id = req.params.id
-	res.json({ message: 'delete ' + id + ' ' });
-});
+// router.put('/', function(req, res)  {
+//   var name = req.body.name
+// 	res.json({ message: 'put ' + name + ' ' });
+// });
+//
+// router.delete('/:id', function(req, res)  {
+//   var id = req.params.id
+// 	res.json({ message: 'delete ' + id + ' ' });
+// });
 
 module.exports = router;
-
-
-// SQL QUERY
-// request = new Request(
-//   "select * from person where email = '" + email + "' FOR JSON AUTO",
-//   function(err, rowCount, rows) { // RESULTS
-//     console.log(rowCount + ' row(s) returned');
-//     if(rowCount == 0){
-//       res.json({message: 'Empty' });
-//     }
-//   }
-// );
-//
-// // LISTEN TO ROW RESULTS
-// request.on('row', function(columns) {
-//    res.json(JSON.parse(columns[0].value));
-// });
-//
-// // EXECUTE
-// connection.execSql(request);
-// });

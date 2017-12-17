@@ -1,5 +1,4 @@
 var Connection = require('tedious').Connection;
-var Request = require('tedious').Request;
 
 // Create connection to database
 var config = {
@@ -14,7 +13,7 @@ var config = {
 }
 var connection = new Connection(config);
 
-// Attempt to connect and execute queries if connection goes through
+// Attempt to connect
 connection.on('connect', function(err) {
   if (err) {
     console.log('Error connecting to DB: ' + err)
@@ -23,6 +22,7 @@ connection.on('connect', function(err) {
   }
 });
 
+// Attempt to debug
 connection.on('debug', function(err) {
    console.log('debug:', err);
  });
