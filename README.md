@@ -1,6 +1,6 @@
 # foodie-api
 
-## SAMPLE OF GET
+## SAMPLE OF GET REQUEST
 
 ###
 ```javascript
@@ -31,3 +31,5 @@ router.get('/login/:email/:password', function(req, res)  {
   connection.execSql(request);
 });
 ```
+
+## TEST OUR REST API [HERE](https://foodin-api.herokuapp.com/person/login/zhiyong@gmail.com/123).
