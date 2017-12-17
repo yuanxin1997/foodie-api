@@ -32,4 +32,5 @@ router.get('/login/:email/:password', function(req, res)  {
 });
 ```
 
-## TEST OUR REST API [HERE](https://foodin-api.herokuapp.com/person/login/zhiyong@gmail.com/123).
+## TEST LOGIN REST API
+[HERE](https://foodin-api.herokuapp.com/person/login/zhiyong@gmail.com/123)
