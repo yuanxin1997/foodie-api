@@ -11,6 +11,7 @@ router.use(function(req, res, next) {
 	next();
 });
 
+// =============================================================================
 router.get('/checkEmail/:email', function(req, res)  {
   var email = req.params.email;
 
@@ -33,13 +34,13 @@ router.get('/checkEmail/:email', function(req, res)  {
   // EXECUTE
   connection.execSql(request);
 });
-
+// =============================================================================
 router.get('/login/:email/:password', function(req, res)  {
   var email = req.params.email;
 	var password = req.params.password;
   // SQL QUERY
   var request = new Request(
-    "select * from person where email = @email and password = @password FOR JSON AUTO",
+    "select * from person where email = @email and password = @password FOR JSON PATH",
     function(err, rowCount) {
       minFunc.log(err, rowCount)
       if(rowCount == 0){
@@ -60,7 +61,7 @@ router.get('/login/:email/:password', function(req, res)  {
   // EXECUTE
   connection.execSql(request);
 });
-
+// =============================================================================
 router.post('/register', function(req, res)  {
   var person = req.body
 
@@ -89,7 +90,7 @@ router.post('/register', function(req, res)  {
   // EXECUTE
   connection.execSql(request);
 });
-
+// =============================================================================
 
 // router.put('/', function(req, res)  {
 //   var name = req.body.name
