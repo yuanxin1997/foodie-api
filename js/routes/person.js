@@ -40,7 +40,7 @@ router.get('/login/:email/:password', function(req, res)  {
 	var password = req.params.password;
   // SQL QUERY
   var request = new Request(
-    "select * from person where email = @email and password = @password FOR JSON PATH",
+    "select id, name, email, age, height, weight from person where email = @email and password = @password FOR JSON AUTO",
     function(err, rowCount) {
       minFunc.log(err, rowCount)
       if(rowCount == 0){
