@@ -7,6 +7,7 @@
 router.get('/login/:email/:password', function(req, res)  {
   var email = req.params.email;
 	var password = req.params.password;
+
   // SQL QUERY
   var request = new Request(
     "select * from person where email = @email and password = @password FOR JSON AUTO",
@@ -32,5 +33,4 @@ router.get('/login/:email/:password', function(req, res)  {
 });
 ```
 
-## TEST LOGIN REST API
-[HERE](https://foodin-api.herokuapp.com/person/login/zhiyong@gmail.com/123)
+TEST LOGIN REST API [HERE](https://foodin-api.herokuapp.com/person/login/zhiyong@gmail.com/123)
