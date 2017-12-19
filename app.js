@@ -10,6 +10,8 @@ var defaultRoute     = express.Router();
 
 // call the routes required
 const person = require('./js/routes/person');
+const illness = require('./js/routes/illness');
+const food = require('./js/routes/food');
 
 // set our port
 var port = process.env.PORT || 8080;
@@ -29,7 +31,8 @@ defaultRoute.get('/', function(req, res) {
 // REGISTER OUR ROUTES -------------------------------
 app.use('', defaultRoute);
 app.use('/person', person);
-
+app.use('/illness', illness);
+app.use('/food', food);
 // START THE SERVER
 // =============================================================================
 app.listen(port);

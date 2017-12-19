@@ -1,3 +1,6 @@
+/**
+ * Created by LI YUAN XIN on 16/12/2017.
+ */
 var Connection = require('tedious').Connection;
 
 // Create connection to database

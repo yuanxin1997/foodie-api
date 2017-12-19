@@ -4,24 +4,22 @@
 
 ###
 ```javascript
-router.get('/login/:email/:password', function(req, res)  {
-  var email = req.params.email;
-	var password = req.params.password;
+router.get('/details/:name', function(req, res)  {
+  var name = req.params.name;
 
   // SQL QUERY
   var request = new Request(
-    "select * from person where email = @email and password = @password FOR JSON AUTO",
+    "select * from food where name = @name FOR JSON AUTO",
     function(err, rowCount) {
       minFunc.log(err, rowCount)
       if(rowCount == 0){
-        res.json({message: 'invalid' });
+        res.json({});
       }
     }
   );
 
   // PARAMETERS --> MUST MATCH TO @[VALUE]
-  request.addParameter('email', TYPES.NVarChar, email);
-	request.addParameter('password', TYPES.NVarChar, password);
+  request.addParameter('name', TYPES.NVarChar, name);
 
 	// LISTEN TO ROW RESULTS
 	request.on('row', function(columns) {
@@ -33,4 +31,4 @@ router.get('/login/:email/:password', function(req, res)  {
 });
 ```
 
-Test our login API  [HERE](https://foodin-api.herokuapp.com/person/login/zhiyong@gmail.com/123)
+Test our login API  [HERE](https://foodin-api.herokuapp.com/food/details/duck%20rice)
