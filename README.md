@@ -31,4 +31,4 @@ router.get('/details/:name', function(req, res)  {
 });
 ```
 
-Test our login API  [HERE](https://foodin-api.herokuapp.com/food/details/duck%20rice)
+Test our food details API (e.g chicken rice, duck rice) [HERE](https://foodin-api.herokuapp.com/food/details/duck%20rice)
