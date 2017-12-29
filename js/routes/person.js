@@ -137,7 +137,7 @@ router.post('/register', function(req, res)  {
 
   // SQL QUERY
   var request = new Request(
-    "insert into person (name, email, password, age, weight, height) values(@name, @email, @password, @age, @weight, @height)",
+    "insert into person (name, email, password, weight, height, gender, DOB) values(@name, @email, @password, @weight, @height, @gender, @DOB)",
     function(err, rowCount) {
       // NUMBER OF ROWS AFFECTED
       minFunc.log(err, rowCount)
@@ -153,9 +153,10 @@ router.post('/register', function(req, res)  {
   request.addParameter('name', TYPES.NVarChar, person.name);
 	request.addParameter('email', TYPES.NVarChar, person.email);
 	request.addParameter('password', TYPES.NVarChar, person.password);
-  request.addParameter('age', TYPES.Int, person.age);
   request.addParameter('weight', TYPES.Decimal, person.weight);
   request.addParameter('height', TYPES.Decimal, person.height);
+	request.addParameter('gender', TYPES.NVarChar, person.password);
+	request.addParameter('DOB', TYPES.Date, person.password);
 
   // EXECUTE
   connection.execSql(request);
@@ -192,7 +193,7 @@ router.get('/details/:email', function(req, res)  {
 
   // SQL QUERY
   var request = new Request(
-    "select id, name, email, age, weight, height from person where email = @email FOR JSON AUTO",
+    "select id, name, email, weight, height, gender, DOB from person where email = @email FOR JSON AUTO",
     function(err, rowCount) {
       minFunc.log(err, rowCount)
       if(rowCount == 0){
