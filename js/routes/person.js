@@ -29,7 +29,7 @@ router.use(function(req, res, next) {
 
  /**
  * TODO USE CASE 3 : REGISTER AN ACCOUNT (PART C: for registration)
- * @param {[name, email, password, weight, height, gender, DOB]} Person
+ * @param {[name, email, password, weight, height, gender, dob]} Person
  * @return {message -> "successful" || "unsucessful"}
  */
 
@@ -42,7 +42,7 @@ router.use(function(req, res, next) {
  /**
  * TODO USE CASE 5 : GET PERSON DETAILS BY EMAIL (after login)
  * @param {[email]} Person
- * @return {Person -> "id, name, email, weight, height, gender, DOB" || ""}
+ * @return {Person -> "id, name, email, weight, height, gender, dob" || ""}
  */
 
  /**
@@ -156,7 +156,7 @@ router.post('/register', function(req, res)  {
   request.addParameter('weight', TYPES.Decimal, person.weight);
   request.addParameter('height', TYPES.Decimal, person.height);
 	request.addParameter('gender', TYPES.NVarChar, person.gender);
-	request.addParameter('dob', TYPES.Date, person.dob);
+	request.addParameter('dob', TYPES.NVarChar, person.dob);
 
   // EXECUTE
   connection.execSql(request);
