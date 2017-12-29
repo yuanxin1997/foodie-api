@@ -193,7 +193,7 @@ router.get('/details/:email', function(req, res)  {
 
   // SQL QUERY
   var request = new Request(
-    "select id, name, email, weight, height, gender, DOB from person where email = @email FOR JSON AUTO",
+    "select * from person where email = @email FOR JSON AUTO",
     function(err, rowCount) {
       minFunc.log(err, rowCount)
       if(rowCount == 0){
