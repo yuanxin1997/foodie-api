@@ -207,7 +207,7 @@ router.get('/details/:email', function(req, res)  {
 
 	// LISTEN TO ROW RESULTS
 	request.on('row', function(columns) {
-	   res.json(JSON.parse(columns[0].value));
+		res.json(JSON.parse(columns[0].value)[0]);
 	});
 
   // EXECUTE
@@ -237,7 +237,7 @@ router.get('/getIllness/:id', function(req, res)  {
 
 	// LISTEN TO ROW RESULTS
 	request.on('row', function(columns) {
-	   res.json(JSON.parse(columns[0].value));
+	   res.json(JSON.parse(columns[0].value)[0]);
 	});
 
   // EXECUTE
@@ -323,7 +323,7 @@ router.get('/getIllnessIndicator/:id', function(req, res)  {
 
 	// LISTEN TO ROW RESULTS
 	request.on('row', function(columns) {
-	   res.json(JSON.parse(columns[0].value));
+	   res.json(JSON.parse(columns[0].value)[0]);
 	});
 
   // EXECUTE
@@ -353,7 +353,7 @@ router.get('/getPersonFood/:id', function(req, res)  {
 
 	// LISTEN TO ROW RESULTS
 	request.on('row', function(columns) {
-	   res.json(JSON.parse(columns[0].value));
+	   res.json(JSON.parse(columns[0].value)[0]);
 	});
 
   // EXECUTE

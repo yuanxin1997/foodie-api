@@ -36,7 +36,7 @@ router.get('/all', function(req, res)  {
 
 	// LISTEN TO ROW RESULTS
 	request.on('row', function(columns) {
-	   res.json(JSON.parse(columns[0].value));
+	   res.json(JSON.parse(columns[0].value)[0]);
 	});
 
   // EXECUTE
