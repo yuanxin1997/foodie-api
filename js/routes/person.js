@@ -137,7 +137,7 @@ router.post('/register', function(req, res)  {
 
   // SQL QUERY
   var request = new Request(
-    "insert into person (name, email, password, weight, height, gender) values(@name, @email, @password, @weight, @height, @gender)",
+    "insert into person (name, email, password, weight, height, gender, dob) values(@name, @email, @password, @weight, @height, @gender, @dob)",
     function(err, rowCount) {
       // NUMBER OF ROWS AFFECTED
       minFunc.log(err, rowCount)
@@ -156,7 +156,7 @@ router.post('/register', function(req, res)  {
   request.addParameter('weight', TYPES.Decimal, person.weight);
   request.addParameter('height', TYPES.Decimal, person.height);
 	request.addParameter('gender', TYPES.NVarChar, person.gender);
-
+	request.addParameter('dob', TYPES.Date, person.dob);
 
   // EXECUTE
   connection.execSql(request);
