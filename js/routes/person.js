@@ -17,26 +17,26 @@ router.use(function(req, res, next) {
  /**
  * TODO USE CASE 1 : CHECK EMAIL EXISTS OR NOT (PART A: for registration)
  * @param {[email]} Person
- * @return {message -> "exists" || "not exists"}
+ * @return {message -> 0 || 1}
  */
 
  /**
  * TODO USE CASE 2 : ADD PERSON ILLNESS (PART B: for registration)
  * @param {[id]} PERSON
  * @param {[id]} ILLNESS
- * @return {message -> "successful" || "unsucessful"}
+ * @return {message -> 0 || 1}
  */
 
  /**
  * TODO USE CASE 3 : REGISTER AN ACCOUNT (PART C: for registration)
  * @param {[name, email, password, weight, height, gender, dob]} Person
- * @return {message -> "successful" || "unsucessful"}
+ * @return {message -> 0 || id}
  */
 
  /**
  * TODO USE CASE 4 : LOGIN
  * @param {[email, password]} Person
- * @return {Message -> "successful" || "unsucessful"}
+ * @return {Message -> 0 || 1}
  */
 
  /**
@@ -61,7 +61,7 @@ router.use(function(req, res, next) {
  * TODO USE CASE 8 : LOG FOOD FOR DAILY TRACKING
  * @param {[id]} Person
  * @param {[id]} Food
- * @return {message -> "successful" || "unsucessful"}
+ * @return {message -> 0 || 1}
  */
 
  /**
@@ -90,9 +90,9 @@ router.get('/checkEmail/:email', function(req, res)  {
     function(err, rowCount) {
       minFunc.log(err, rowCount)
       if(rowCount == 0){
-        res.json({message: 'not exists' });
+        res.json({message: 0 });
       } else{
-        res.json({message: 'exists' });
+        res.json({message: 1 });
       }
     }
   );
@@ -116,9 +116,9 @@ router.post('/addPersonIllness/:personId/:illnessId', function(req, res)  {
       // NUMBER OF ROWS AFFECTED
       minFunc.log(err, rowCount)
       if(rowCount == 0){
-        res.json({message: 'unsucessful' });
+        res.json({message: 0 });
       } else{
-        res.json({message: 'sucessful' });
+        res.json({message: 1 });
       }
     }
   );
@@ -142,7 +142,7 @@ router.post('/register', function(req, res)  {
       // NUMBER OF ROWS AFFECTED
       minFunc.log(err, rowCount)
       if(rowCount == 0){
-        res.json({message: "hi"});
+        res.json({message: 0});
       }
     }
   );
@@ -158,7 +158,8 @@ router.post('/register', function(req, res)  {
 
 	// LISTEN TO ROW RESULTS
 	request.on('row', function(columns) {
-		res.json(JSON.parse(columns[0].value)[0]);
+		// return Person Id
+		res.json({message: JSON.parse(columns[0].value)});
 	});
 
   // EXECUTE
@@ -175,9 +176,9 @@ router.get('/login/:email/:password', function(req, res)  {
     function(err, rowCount) {
       minFunc.log(err, rowCount)
       if(rowCount == 0){
-        res.json({message: 'invalid' });
+        res.json({message: 0 });
       }else {
-				res.json({message: 'valid' });
+				res.json({message: 1 });
 			}
     }
   );
@@ -258,9 +259,9 @@ router.delete('/deletePersonIllness/:personId/:illnessId', function(req, res)  {
     function(err, rowCount) {
       minFunc.log(err, rowCount)
 			if(rowCount == 0){
-        res.json({message: 'unsucessful' });
+        res.json({message: 0 });
       }else {
-				res.json({message: 'successful' });
+				res.json({message: 1 });
 			}
     }
   );
@@ -286,9 +287,9 @@ router.post('/logPersonFood/:personId/:foodId/:timestamp', function(req, res)  {
     function(err, rowCount) {
       minFunc.log(err, rowCount)
       if(rowCount == 0){
-        res.json({message: 'unsucessful' });
+        res.json({message: 0 });
       } else{
-        res.json({message: 'sucessful' });
+        res.json({message: 1 });
       }
     }
   );
