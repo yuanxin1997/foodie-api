@@ -137,7 +137,7 @@ router.post('/register', function(req, res)  {
 
   // SQL QUERY
   var request = new Request(
-    "insert into person (name, email, password, weight, height, gender, dob) values(@name, @email, @password, @weight, @height, @gender, @dob) select id FROM Person WHERE email = @email FOR JSON AUTO",
+    "insert into person (name, email, password, weight, height, gender, dob) OUTPUT Inserted.ID values(@name, @email, @password, @weight, @height, @gender, @dob) FOR JSON AUTO",
     function(err, rowCount) {
       // NUMBER OF ROWS AFFECTED
       minFunc.log(err, rowCount)
