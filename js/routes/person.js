@@ -137,14 +137,12 @@ router.post('/register', function(req, res)  {
 
   // SQL QUERY
   var request = new Request(
-    "insert into person (name, email, password, weight, height, gender, dob) values(@name, @email, @password, @weight, @height, @gender, @dob)",
+    "insert into person (name, email, password, weight, height, gender, dob) values(@name, @email, @password, @weight, @height, @gender, @dob);select id FROM Person WHERE email = @email;",
     function(err, rowCount) {
       // NUMBER OF ROWS AFFECTED
       minFunc.log(err, rowCount)
       if(rowCount == 0){
-        res.json({message: 'unsucessful' });
-      } else{
-        res.json({message: 'sucessful' });
+        res.json({});
       }
     }
   );
@@ -157,6 +155,11 @@ router.post('/register', function(req, res)  {
   request.addParameter('height', TYPES.Decimal, person.height);
 	request.addParameter('gender', TYPES.NVarChar, person.gender);
 	request.addParameter('dob', TYPES.NVarChar, person.dob);
+
+	// LISTEN TO ROW RESULTS
+	request.on('row', function(columns) {
+		res.json(JSON.parse(columns[0].value)[0]);
+	});
 
   // EXECUTE
   connection.execSql(request);
