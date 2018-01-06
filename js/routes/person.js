@@ -137,12 +137,12 @@ router.post('/register', function(req, res)  {
 
   // SQL QUERY
   var request = new Request(
-    "insert into person (name, email, password, weight, height, gender, dob) OUTPUT Inserted.ID values(@name, @email, @password, @weight, @height, @gender, @dob) FOR JSON AUTO",
+    "insert into person (name, email, password, weight, height, gender, dob) OUTPUT Inserted.ID FOR JSON AUTO values(@name, @email, @password, @weight, @height, @gender, @dob)",
     function(err, rowCount) {
       // NUMBER OF ROWS AFFECTED
       minFunc.log(err, rowCount)
       if(rowCount == 0){
-        res.json({});
+        res.json({message: "hi"});
       }
     }
   );
