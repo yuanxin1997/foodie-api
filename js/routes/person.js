@@ -42,7 +42,7 @@ router.use(function(req, res, next) {
  /**
  * TODO USE CASE 5 : GET PERSON DETAILS BY ID (after login)
  * @param {[id]} Person
- * @return {Person -> "id, name, email, weight, height, gender, dob" || ""}
+ * @return {Person -> * || ""}
  */
 
  /**
@@ -54,7 +54,7 @@ router.use(function(req, res, next) {
  /**
  * TODO USE CASE 7 : DELETE PERSON ILLNESS
  * @param {[id]} Illness
- * @return {Illness -> "name" || ""}
+ * @return {message -> 0 || 1}
  */
 
  /**
@@ -187,7 +187,7 @@ router.get('/login/:email/:password', function(req, res)  {
 
 	// LISTEN TO ROW RESULTS
 	request.on('row', function(columns) {
-		// RETURN PERSON DETAILS
+		// RETURN PERSON ID
 		res.json({message: JSON.parse(columns[0].value)});;
 	});
 
@@ -331,7 +331,7 @@ router.get('/getIllnessIndicator/:id', function(req, res)  {
 
 	// LISTEN TO ROW RESULTS
 	request.on('row', function(columns) {
-	   res.json(JSON.parse(columns[0].value)[0]);
+	   res.json(JSON.parse(columns[0].value));
 	});
 
   // EXECUTE
@@ -361,7 +361,7 @@ router.get('/getPersonFood/:id', function(req, res)  {
 
 	// LISTEN TO ROW RESULTS
 	request.on('row', function(columns) {
-	   res.json(JSON.parse(columns[0].value)[0]);
+	   res.json(JSON.parse(columns[0].value));
 	});
 
   // EXECUTE
