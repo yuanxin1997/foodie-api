@@ -64,19 +64,17 @@ router.use(function(req, res, next) {
  * @return {message -> 0 || 1}
  */
 
- /**
+/**
  * TODO USE CASE 9 : GET ILLNESS INDICATOR DETAILS BY ID
  * @param {[id]} Person // 3 INNER JOIN
- * @return {Illness_Indicator -> "indicatorName, maxValue, minValue, illnessName" || ""}
+ * @return {Illness_Indicator -> "illnessId, name, maxValue, minValue" || ""}
  */
 
-  /**
-  * TODO USE CASE 10 : GET PERSON'S LOGGED FOOD details BY ID
-  * @param {[id]} Peson // 2 INNER JOIN
-  * @return {Food -> "name, calories, carbohydrate, fat, protein, vitaminA, vitaminC, sodium, potassium, calcium, iron" || ""}
-  */
-  //=====================inner join
-
+/**
+ * TODO USE CASE 10 : GET PERSON'S LOGGED FOOD details BY ID
+ * @param {[id]} Person // 2 INNER JOIN
+ * @return {Food -> "name, calories, carbohydrate, fat, protein, vitaminA, vitaminC, sodium, potassium, calcium, iron" || ""}
+ */
 
 // =============================================================================
 // #############################################################################
