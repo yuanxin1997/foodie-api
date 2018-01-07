@@ -158,7 +158,7 @@ router.post('/register', function(req, res)  {
 
 	// LISTEN TO ROW RESULTS
 	request.on('row', function(columns) {
-		// return Person Id
+		// RETURN PERSON ID
 		res.json({message: JSON.parse(columns[0].value)});
 	});
 
@@ -176,16 +176,20 @@ router.get('/login/:email/:password', function(req, res)  {
     function(err, rowCount) {
       minFunc.log(err, rowCount)
       if(rowCount == 0){
-        res.json({message: 0 });
-      }else {
-				res.json({message: 1 });
-			}
+        res.json({});
+      }
     }
   );
 
   // PARAMETERS --> MUST MATCH TO @[VALUE]
   request.addParameter('email', TYPES.NVarChar, email);
 	request.addParameter('password', TYPES.NVarChar, password);
+
+	// LISTEN TO ROW RESULTS
+	request.on('row', function(columns) {
+		// RETURN PERSON DETAILS
+		res.json(JSON.parse(columns[0].value));
+	});
 
   // EXECUTE
   connection.execSql(request);
