@@ -36,12 +36,12 @@ router.use(function(req, res, next) {
  /**
  * TODO USE CASE 4 : LOGIN
  * @param {[email, password]} Person
- * @return {Message -> 0 || 1}
+ * @return {Message -> 0 || id}
  */
 
  /**
- * TODO USE CASE 5 : GET PERSON DETAILS BY EMAIL (after login)
- * @param {[email]} Person
+ * TODO USE CASE 5 : GET PERSON DETAILS BY ID (after login)
+ * @param {[id]} Person
  * @return {Person -> "id, name, email, weight, height, gender, dob" || ""}
  */
 
@@ -172,7 +172,7 @@ router.get('/login/:email/:password', function(req, res)  {
 	var password = req.params.password;
   // SQL QUERY
   var request = new Request(
-    "select * from person where email = @email and password = @password FOR JSON AUTO",
+    "select id from person where email = @email and password = @password",
     function(err, rowCount) {
       minFunc.log(err, rowCount)
       if(rowCount == 0){
