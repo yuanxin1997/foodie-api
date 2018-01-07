@@ -312,7 +312,7 @@ router.get('/getIllnessIndicator/:id', function(req, res)  {
   var id = req.params.id;
   // SQL QUERY
   var request = new Request(
-    "select ii.illnessid, ii.name, ii.maxValue, ii.minValue "
+    "select ii.illnessId, ii.name, ii.maxValue, ii.minValue "
 + "from illnessIndicator ii "
 + "inner join illness i on ii.illnessId = i.id "
 + "inner join personIllness pi on i.id = pi.illnessId "
