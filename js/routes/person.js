@@ -176,7 +176,7 @@ router.get('/login/:email/:password', function(req, res)  {
     function(err, rowCount) {
       minFunc.log(err, rowCount)
       if(rowCount == 0){
-        res.json({});
+        res.json({message: 0});
       }
     }
   );
@@ -188,20 +188,20 @@ router.get('/login/:email/:password', function(req, res)  {
 	// LISTEN TO ROW RESULTS
 	request.on('row', function(columns) {
 		// RETURN PERSON DETAILS
-		res.json(JSON.parse(columns[0].value)[0]);
+		res.json({message: JSON.parse(columns[0].value)});;
 	});
 
   // EXECUTE
   connection.execSql(request);
 });
 // #############################################################################
-// USE CASE 5 : GET PERSON DETAILS BY EMAIL (PART A: after login)
-router.get('/details/:email', function(req, res)  {
-  var email = req.params.email;
+// USE CASE 5 : GET PERSON DETAILS BY ID (PART A: after login)
+router.get('/details/:id', function(req, res)  {
+  var id = req.params.id;
 
   // SQL QUERY
   var request = new Request(
-    "select * from person where email = @email FOR JSON AUTO",
+    "select * from person where id = @id FOR JSON AUTO",
     function(err, rowCount) {
       minFunc.log(err, rowCount)
       if(rowCount == 0){
@@ -211,7 +211,7 @@ router.get('/details/:email', function(req, res)  {
   );
 
   // PARAMETERS --> MUST MATCH TO @[VALUE]
-  request.addParameter('email', TYPES.NVarChar, email);
+  request.addParameter('id', TYPES.Int, id);
 
 	// LISTEN TO ROW RESULTS
 	request.on('row', function(columns) {
@@ -241,7 +241,7 @@ router.get('/getIllness/:id', function(req, res)  {
   );
 
 	// PARAMETERS --> MUST MATCH TO @[VALUE]
-	request.addParameter('id', TYPES.NVarChar, id);
+	request.addParameter('id', TYPES.Int, id);
 
 	// LISTEN TO ROW RESULTS
 	request.on('row', function(columns) {
@@ -327,7 +327,7 @@ router.get('/getIllnessIndicator/:id', function(req, res)  {
   );
 
 	// PARAMETERS --> MUST MATCH TO @[VALUE]
-	request.addParameter('id', TYPES.NVarChar, id);
+	request.addParameter('id', TYPES.Int, id);
 
 	// LISTEN TO ROW RESULTS
 	request.on('row', function(columns) {
@@ -357,7 +357,7 @@ router.get('/getPersonFood/:id', function(req, res)  {
   );
 
 	// PARAMETERS --> MUST MATCH TO @[VALUE]
-	request.addParameter('id', TYPES.NVarChar, id);
+	request.addParameter('id', TYPES.Int, id);
 
 	// LISTEN TO ROW RESULTS
 	request.on('row', function(columns) {
