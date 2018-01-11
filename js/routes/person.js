@@ -348,7 +348,7 @@ router.get('/getPersonFood/:id/:start/:end', function(req, res)  {
 		+ "inner join personFood pf on f.id = pf.foodId "
 		+ "inner join person p on pf.personId = p.id "
 		+ "where p.id = @id and pf.timestamp >= @start "
-		+ "and pf.timstamp <= @end FOR JSON AUTO",
+		+ "and pf.timestamp <= @end FOR JSON AUTO",
 
     function(err, rowCount) {
       minFunc.log(err, rowCount)
