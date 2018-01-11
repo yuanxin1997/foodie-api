@@ -360,8 +360,8 @@ router.get('/getPersonFood/:id/:start/:end', function(req, res)  {
 
 	// PARAMETERS --> MUST MATCH TO @[VALUE]
 	request.addParameter('id', TYPES.Int, id);
-	request.addParameter('start', TYPES.Int, start);
-	request.addParameter('end', TYPES.Int, end);
+	request.addParameter('start', TYPES.BigInt, start);
+	request.addParameter('end', TYPES.BigInt, end);
 
 	// LISTEN TO ROW RESULTS
 	request.on('row', function(columns) {
