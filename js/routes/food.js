@@ -19,6 +19,12 @@ router.use(function(req, res, next) {
  * @param {[name]} Food
  * @return {Food -> "*" || ""}
  */
+
+ /**
+ * TODO USE CASE 2 : GET ALL ILLNESS
+ * @param {[]}
+ * @return {Food -> "*" || ""}
+ */
 // =============================================================================
 // #############################################################################
 // USE CASE 1 : GET FOOD DETAILS BY NAME
@@ -42,6 +48,28 @@ router.get('/details/:name', function(req, res)  {
 	// LISTEN TO ROW RESULTS
 	request.on('row', function(columns) {
 	   res.json(JSON.parse(columns[0].value)[0]);
+	});
+
+  // EXECUTE
+  connection.execSql(request);
+});
+// #############################################################################
+// USE CASE 2 : GET ALL FOODNAME
+router.get('/all', function(req, res)  {
+  // SQL QUERY
+  var request = new Request(
+    "select name from food FOR JSON AUTO",
+    function(err, rowCount) {
+      minFunc.log(err, rowCount)
+      if(rowCount == 0){
+        res.json({});
+      }
+    }
+  );
+
+	// LISTEN TO ROW RESULTS
+	request.on('row', function(columns) {
+	   res.json(JSON.parse(columns[0].value));
 	});
 
   // EXECUTE
