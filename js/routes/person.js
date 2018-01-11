@@ -343,7 +343,7 @@ router.get('/getPersonFood/:id/:timestampStart/:timestampEnd', function(req, res
 	var timestampEnd = req.params.timestampEnd;
   // SQL QUERY
   var request = new Request(
-    "select f.name, f.calories, f.carbohydrate, f.fat, f.protein, f.vitaminA, f.vitaminC, f.sodium, f.potassium, f.calcium, f.iron "
+    "select f.*"
 		+ "from food f "
 		+ "inner join personFood pf on f.id = pf.foodId "
 		+ "inner join person p on pf.personId = p.id "
