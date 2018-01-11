@@ -343,7 +343,7 @@ router.get('/getPersonFood/:id/:start/:end', function(req, res)  {
 	var end = req.params.end;
   // SQL QUERY
   var request = new Request(
-    "select f.*"
+    "select f.* "
 		+ "from food f "
 		+ "inner join personFood pf on f.id = pf.foodId "
 		+ "inner join person p on pf.personId = p.id "
@@ -360,8 +360,8 @@ router.get('/getPersonFood/:id/:start/:end', function(req, res)  {
 
 	// PARAMETERS --> MUST MATCH TO @[VALUE]
 	request.addParameter('id', TYPES.Int, id);
-	request.addParameter('start', TYPES.BigInt, start);
-	request.addParameter('end', TYPES.BigInt, end);
+	request.addParameter('start', TYPES.Int, start);
+	request.addParameter('end', TYPES.Int, end);
 
 	// LISTEN TO ROW RESULTS
 	request.on('row', function(columns) {
