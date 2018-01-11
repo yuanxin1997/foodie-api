@@ -337,18 +337,18 @@ router.get('/getIllnessIndicator/:id', function(req, res)  {
 });
 // #############################################################################
 // USE CASE 10 : GET PERSON'S LOGGED FOOD details BY ID
-router.get('/getPersonFood/:id/:start/:end', function(req, res)  {
+router.get('/getPersonFood/:id/:from/:to', function(req, res)  {
   var id = req.params.id;
-	var start = req.params.start;
-	var end = req.params.end;
+	var from = req.params.from;
+	var to = req.params.to;
   // SQL QUERY
   var request = new Request(
     "select f.* "
 		+ "from food f "
 		+ "inner join personFood pf on f.id = pf.foodId "
 		+ "inner join person p on pf.personId = p.id "
-		+ "where p.id = @id and pf.timestamp >= @start "
-		+ "and pf.timestamp <= @end FOR JSON AUTO",
+		+ "where p.id = @id and pf.timestamp >= @from "
+		+ "and pf.timestamp <= @to FOR JSON AUTO",
 
     function(err, rowCount) {
       minFunc.log(err, rowCount)
@@ -360,8 +360,8 @@ router.get('/getPersonFood/:id/:start/:end', function(req, res)  {
 
 	// PARAMETERS --> MUST MATCH TO @[VALUE]
 	request.addParameter('id', TYPES.Int, id);
-	request.addParameter('start', TYPES.Int, start);
-	request.addParameter('end', TYPES.Int, end);
+	request.addParameter('start', TYPES.Int, from);
+	request.addParameter('end', TYPES.Int, to);
 
 	// LISTEN TO ROW RESULTS
 	request.on('row', function(columns) {
