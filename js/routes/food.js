@@ -14,15 +14,15 @@ router.use(function(req, res, next) {
 	next();
 });
 // =============================================================================
- /**
- * TODO USE CASE 1 : GET FOOD DETAILS BY NAME
- * @param {[name]} Food
- * @return {Food -> "*" || ""}
- */
+/**
+* TODO USE CASE 1 : GET ALL FOOD NAME
+* @param {[]}
+* @return {Food -> "*" || ""}
+*/
 
  /**
- * TODO USE CASE 2 : GET ALL ILLNESS
- * @param {[]}
+ * TODO USE CASE 2 : GET FOOD DETAILS BY NAME
+ * @param {[name]} Food
  * @return {Food -> "*" || ""}
  */
 // =============================================================================
@@ -54,8 +54,8 @@ router.get('/details/:name', function(req, res)  {
   connection.execSql(request);
 });
 // #############################################################################
-// USE CASE 2 : GET ALL FOODNAME
-router.get('/all', function(req, res)  {
+// USE CASE 2 : GET ALL FOOD NAME
+router.get('/allName', function(req, res)  {
   // SQL QUERY
   var request = new Request(
     "select name from food FOR JSON AUTO",
