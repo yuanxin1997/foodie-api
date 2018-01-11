@@ -352,9 +352,6 @@ router.get('/getPersonFood/:id/:from/:to', function(req, res)  {
 
     function(err, rowCount) {
       minFunc.log(err, rowCount)
-      if(rowCount == 0){
-        res.json({});
-      }
     }
   );
 
