@@ -343,7 +343,7 @@ router.get('/getPersonFood/:id/:from/:to', function(req, res)  {
 	var to = req.params.to;
   // SQL QUERY
   var request = new Request(
-    "select f.*, pf.timestamp "
+    "select f.* "
 		+ "from food f "
 		+ "inner join personFood pf on f.id = pf.foodId "
 		+ "inner join person p on pf.personId = p.id "
