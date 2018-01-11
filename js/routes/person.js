@@ -348,7 +348,7 @@ router.get('/getPersonFood/:id/:from/:to', function(req, res)  {
 		+ "inner join personFood pf on f.id = pf.foodId "
 		+ "inner join person p on pf.personId = p.id "
 		+ "where p.id = @id and pf.timestamp >= @from "
-		+ "and pf.timestamp <= @to FOR JSON AUTO",
+		+ "and pf.timestamp <= @to",
 
     function(err, rowCount) {
       minFunc.log(err, rowCount)
@@ -363,11 +363,21 @@ router.get('/getPersonFood/:id/:from/:to', function(req, res)  {
 	request.addParameter('from', TYPES.Int, from);
 	request.addParameter('to', TYPES.Int, to);
 
-	// LISTEN TO ROW RESULTS
-	request.on('row', function(columns) {
-	   res.json(JSON.parse(columns[0].value));
-	});
-
+  // LISTEN TO ROW RESULTS
+  const rows = []
+  request.on('row', function(columns) 
+  {
+    var row = {};
+    columns.map((col) => {
+      row[col.metadata.colName] = col.value;
+    });
+    rows.push(row)
+  });
+  
+  request.on('requestCompleted', () => {
+    res.json(rows)
+  });
+  
   // EXECUTE
   connection.execSql(request);
 });
